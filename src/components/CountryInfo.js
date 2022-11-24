@@ -4,17 +4,16 @@ import axios from "axios";
 const CountryInfo = ({ country }) => {
     const [weatherInfo, setWeatherInfo] = useState({})
     const ACCESS_KEY = process.env.REACT_APP_API_KEY
-    console.log(ACCESS_KEY)
+
 
     useEffect(() => {
         const ACCESS_KEY = process.env.REACT_APP_API_KEY
-        axios
-            .get(`http://api.weatherstack.com/current?access_key=${ACCESS_KEY}&query=${country.capital.toLowerCase()}&units=m`)
+            axios
+            .get(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital.toLowerCase()}&units=metric&appid=${ACCESS_KEY}`)
             .then(response => {
-                console.log(response.data);
-                const temperature = response.data.current.temperature;
-
-
+                console.log('response data');
+                const temperature = response.data.main.temp;
+                console.log(temperature);
                 const weatherObject = {
                     temperature: temperature
                 }
@@ -36,7 +35,7 @@ const CountryInfo = ({ country }) => {
                 ))}
             </ul>
             <h3>Flag:</h3>
-            <img src={country.flag} width={"200"} />
+            <img src={country.flag} width={"200"}  alt={country.name}/>
 
             <h3>Weather in {country.capital}</h3>
             <p>Temperature:{weatherInfo.temperature} Celcius</p>

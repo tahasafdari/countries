@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import Country from "./components/Country";
 import CountryInfo from "./components/CountryInfo";
+import Filter from './components/Filter';
 
 const App = () => {
     const [filter, setFilter] = useState('')
@@ -30,7 +31,7 @@ const App = () => {
 
   return (
     <div>
-        find countries <input value={filter} onChange={handleFilterCountry} />
+      <Filter value={filter} onChange={handleFilterCountry} />
         <div>
             {showCountries.length > 10 ? (
                 "Too many matches, specify another filter"
