@@ -8,9 +8,10 @@ const CountryInfo = ({ country }) => {
 
     useEffect(() => {
         const ACCESS_KEY = process.env.REACT_APP_API_KEY
-        axios
-            .get(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${ACCESS_KEY}`)
+            axios
+            .get(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital.toLowerCase()}&units=metric&appid=${ACCESS_KEY}`)
             .then(response => {
+                console.log('response data');
                 const temperature = response.data.main.temp;
                 console.log(temperature);
                 const weatherObject = {
@@ -35,6 +36,8 @@ const CountryInfo = ({ country }) => {
                     <li key={language.name}>{language.name}</li>
                 ))}
             </ul>
+            <h3>Flag:</h3>
+            <img src={country.flag} width={"200"}  alt={country.name}/>
 
 
             */}
