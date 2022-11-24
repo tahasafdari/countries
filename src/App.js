@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import Country from "./components/Country";
 import CountryInfo from "./components/CountryInfo";
+import Filter from "./components/Filter";
 
 const App = () => {
     const [filter, setFilter] = useState('')
@@ -12,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-        .get('https://restcountries.com/v2/all')
+        .get('https://restcountries.com/v3.1/all')
         .then(response => {
           setCountries(response.data)
         })
@@ -26,18 +27,18 @@ const App = () => {
   const showCountries =
       filter === ""
           ? [] :
-          countries.filter(country => country.name.toLowerCase().includes(filter.toLowerCase()))
+          countries.filter(country => country.name.common.toLowerCase().includes(filter.toLowerCase()))
 
   return (
     <div>
-        find countries <input value={filter} onChange={handleFilterCountry} />
+        <Filter value={filter} onChange={handleFilterCountry} />
         <div>
             {showCountries.length > 10 ? (
                 "Too many matches, specify another filter"
             ): showCountries.length === 1 ? (
                 <CountryInfo country={showCountries[0]} />
             ) : (showCountries.map(country => (
-                <div key={country.name}>
+                <div key={country}>
                     <Country country={country} />
                 </div>
             )))}

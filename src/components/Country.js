@@ -9,7 +9,7 @@ const Country = ({ country }) => {
     if (show) {
         return (
             <div>
-                {country.name}
+                {country.name.common}
                 <button onClick={handleShowClick}>{show ? "Hide" : "Show"}</button>
                 <CountryInfo country={country} />
             </div>
@@ -18,7 +18,7 @@ const Country = ({ country }) => {
 
     return (
         <div>
-            {country.name}
+            {country.name.common}
             <button onClick={handleShowClick}>{show ? "Hide" : "Show"}</button>
         </div>
     );
